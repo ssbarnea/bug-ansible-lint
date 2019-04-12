@@ -1,0 +1,6 @@
+- name: Get libvirt nodepool IP addresses
+  script: "get-domain-ip.sh {{ item.name }}"
+  register: "ip_result"
+  until: "ip_result is success"
+  retries: "{{ libvirt_wait_retries }}"
+  delay: "{{ libvirt_wait_delay }}"
